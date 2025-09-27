@@ -1,66 +1,48 @@
-"""
-Problem 1: Duplicate Tracker
-
-You are given a collection of product IDs. Some IDs may appear more than once.
-Write a function that returns True if any duplicates are found, and False otherwise.
-
-Example:
-Input: [10, 20, 30, 20, 40]
-Output: True
-
-Input: [1, 2, 3, 4, 5]
-Output: False
-"""
-
+# Problem 1: Duplicate Tracker
 def has_duplicates(product_ids):
-    # Your implementation here
-    pass
+    """
+    A set is used to track seen product IDs because it provides average time complexity for lookups and insertions.
+    This allows us to efficiently check for duplicates as we iterate through the list.
+    """
+    seen = set()
+    for pid in product_ids:
+        if pid in seen:
+            return True
+        seen.add(pid)
+    return False
 
 
-"""
-Problem 2: Order Manager
-
-You need to maintain a list of tasks in the order they were added, and support removing tasks from the front.
-Implement a class that supports add_task(task) and remove_oldest_task().
-
-Example:
-task_queue = TaskQueue()
-task_queue.add_task("Email follow-up")
-task_queue.add_task("Code review")
-task_queue.remove_oldest_task() → "Email follow-up"
-"""
+# Problem 2: Order Manager
+from collections import deque
 
 class TaskQueue:
+    """
+    A ddouble-ended queue is ideal here because it allows time complexity for both appending to the end
+    and popping from the front, which matches the required operations for a task queue.
+    """
     def __init__(self):
-        # Your initialization here
-        pass
+        self.queue = deque()
 
     def add_task(self, task):
-        pass
+        self.queue.append(task)  
 
     def remove_oldest_task(self):
-        pass
+        if self.queue:
+            return self.queue.popleft()  
+        return None
 
 
-"""
-Problem 3: Unique Value Counter
-
-You receive a stream of integer values. At any point, you should be able to return the number of unique values seen so far.
-
-Example:
-tracker = UniqueTracker()
-tracker.add(10)
-tracker.add(20)
-tracker.add(10)
-tracker.get_unique_count() → 2
-"""
-
+# Problem 3: Unique Value Counter
 class UniqueTracker:
+    """
+    A set is used to store unique values because it automatically handles duplicates and supports insertion and lookup.
+    This makes it efficient to track and count unique values in a stream.
+    """
     def __init__(self):
-        pass
+        self.unique_values = set()
 
     def add(self, value):
-        pass
+        self.unique_values.add(value)  
 
     def get_unique_count(self):
-        pass
+        return len(self.unique_values)  
